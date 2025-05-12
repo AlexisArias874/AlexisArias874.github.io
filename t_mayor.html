@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Cuentas T</title>
+        <link rel="stylesheet" href="styles.css">
+        <style>
+            p.viñeta-alternativa {
+                display: list-item;
+                list-style-type: disc;
+            }
+    
+            /* MENÚ SUPERIOR HORIZONTAL */
+            .nav-bar {
+                background-color: #2c3e50; /* mismo color que el header (ajústalo si usas otro) */
+                padding: 10px;
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+    
+            .nav-bar a {
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+                padding: 8px 12px;
+                transition: background-color 0.3s ease;
+            }
+    
+            .nav-bar a:hover {
+                background-color: #34495e;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+    <body>
+    
+        <!-- MENÚ SUPERIOR HORIZONTAL -->
+        <nav class="nav-bar">
+            <a href="index.html">INICIO</a>
+            <a href="costos_variables.html">COSTOS VARIABLES UNITARIOS Y COSTOS FIJOS TOTALES</a>
+            <a href="Estado_resultado.html">ESTADO DE RESULTADOS</a>
+            <a href="punto_alto_bajo.html">PUNTO ALTO Y PUNTO BAJO</a>
+            <a href="PUNTOE.html">PUNTO DE EQUILIBRIO</a>
+            <a href="Asientos.html">ASIENTOS CONTABLES</a>
+        </nav>
+<head>
+    <meta charset="UTF-8">
+    <title>Cuentas T</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .nombre-cuenta {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+            width: 100%;
+            padding: 6px;
+            box-sizing: border-box;
+        }
+        .cuenta-t {
+            border: 2px solid #ccc;
+            padding: 15px;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 500px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        .movimiento {
+            margin-bottom: 10px;
+        }
+        .movimiento input {
+            width: 45%;
+            padding: 6px;
+            margin: 5px 2%;
+        }
+        .boton-agregar, .boton-total {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .total {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header class="index-header2">
+        <h1 class="titulo-principal">CUENTAS T</h1>
+    </header>
+    
+    <section>
+        <h2 style="text-align: center;">¿Qué es y para qué sirve una cuenta T?</h2>
+        <p>Cuando se habla de una cuenta T, se refiere al método para registrar los hechos económicos de un negocio. Se trata de una de las herramientas contables más utilizadas para organizar, clasificar y entender el comportamiento de las cuentas.</p>
+        <p></p><br>
+        <p>En una cuenta T se distinguen los siguientes elementos: el nombre de la cuenta, el saldo y las dos columnas del <strong>Debe</strong> y el <strong>Haber</strong>.</p>
+        <p></p><br>
+        <p>El <strong>Debe</strong> se registra en el lado izquierdo de la cuenta para indicar los ingresos o aumentos en el negocio. Si la suma del Debe es mayor que la del Haber, significa que existe un saldo deudor en las cuentas contables. Por otro lado, el <strong>Haber</strong> se ubica en el lado derecho para reflejar los egresos o disminuciones. Si la suma del Haber es mayor que la del Debe, el saldo es acreedor.</p>
+        <img src="3.png" alt="Ejemplo de cuenta T" class="marco-decorativo3">
+
+        <h1>CALCULADORA DE CUENTAS T</h1>
+    </section>
+
+    <div id="contenedor-cuentas" class="contenedor-cuentas">
+        <!-- Cuentas se generan aquí -->
+    </div>
+
+    <button onclick="crearCuentaT()" style="
+        background: #B9A929;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        margin: 20px auto;
+        display: block;
+        cursor: pointer;
+        border-radius: 6px;
+        font-size: 1.1em;
+    ">+ Nueva Cuenta T</button>
+
+    <script>
+        // Crear 2 cuentas iniciales al cargar
+        window.onload = function() {
+            crearCuentaT();
+            crearCuentaT();
+        };
+
+        let contadorCuentas = 0;
+        
+        function crearCuentaT() {
+            contadorCuentas++;
+            const cuenta = document.createElement('div');
+            cuenta.className = 'cuenta-t';
+            cuenta.innerHTML = `
+                <input type="text" class="nombre-cuenta" value="Cuenta ${contadorCuentas}">
+                <div class="movimientos" id="movimientos-${contadorCuentas}">
+                    <div class="movimiento">
+                        <input type="number" placeholder="Debe" class="debe">
+                        <input type="number" placeholder="Haber" class="haber">
+                    </div>
+                </div>
+                <button class="boton-agregar" onclick="agregarFila(${contadorCuentas})">+ Agregar Fila</button>
+                <button class="boton-total" onclick="calcularTotal(${contadorCuentas})">Calcular Total</button>
+                <div class="total">Total: <span id="total-${contadorCuentas}">0.00</span></div>
+            `;
+            document.getElementById('contenedor-cuentas').appendChild(cuenta);
+        }
+
+        function agregarFila(id) {
+            const movimientos = document.getElementById(`movimientos-${id}`);
+            const fila = document.createElement('div');
+            fila.className = 'movimiento';
+            fila.innerHTML = `
+                <input type="number" placeholder="Debe" class="debe">
+                <input type="number" placeholder="Haber" class="haber">
+            `;
+            movimientos.appendChild(fila);
+        }
+
+        function calcularTotal(id) {
+            const debeInputs = document.querySelectorAll(`#movimientos-${id} .debe`);
+            const haberInputs = document.querySelectorAll(`#movimientos-${id} .haber`);
+            
+            let totalDebe = 0;
+            let totalHaber = 0;
+            
+            debeInputs.forEach(input => {
+                totalDebe += parseFloat(input.value) || 0;
+            });
+            
+            haberInputs.forEach(input => {
+                totalHaber += parseFloat(input.value) || 0;
+            });
+            
+            const saldo = totalDebe - totalHaber;
+            document.getElementById(`total-${id}`).textContent = saldo.toFixed(2);
+        }
+    </script>
+</body>
+</html>

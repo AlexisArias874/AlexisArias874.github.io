@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="es">
+        <head>
+        <meta charset="UTF-8">
+        <title>Asientos contables</title>
+        <link rel="stylesheet" href="styles.css">
+        <style>
+            p.viñeta-alternativa {
+                display: list-item;
+                list-style-type: disc;
+            }
+    
+            /* MENÚ SUPERIOR HORIZONTAL */
+            .nav-bar {
+                background-color: #2c3e50; /* mismo color que el header (ajústalo si usas otro) */
+                padding: 10px;
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+    
+            .nav-bar a {
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+                padding: 8px 12px;
+                transition: background-color 0.3s ease;
+            }
+    
+            .nav-bar a:hover {
+                background-color: #34495e;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+    <body>
+    
+        <!-- MENÚ SUPERIOR HORIZONTAL -->
+        <nav class="nav-bar">
+            <a href="index.html">INICIO</a>
+            <a href="costos_variables.html">COSTOS VARIABLES UNITARIOS Y COSTOS FIJOS TOTALES</a>
+            <a href="t_mayor.html">CUENTAS T</a>
+            <a href="Estado_resultado.html">ESTADO DE RESULTADOS</a>
+            <a href="punto_alto_bajo.html">PUNTO ALTO Y PUNTO BAJO</a>
+        </nav>
+<head>
+    <meta charset="UTF-8">
+    <title>Punto de Equilibrio</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        p.viñeta-alternativa {
+            display: list-item;
+            list-style-type: disc; 
+        }
+    </style>
+</head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="menu.js" defer></script>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Estilos para el encabezado */
+        .contabilidad-header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 0 0 10px 10px;
+        }
+
+        /* Estilos para pestañas/navegación interna */
+        .tab-container {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #ecf0f1;
+            margin-right: 5px;
+            border-radius: 5px 5px 0 0;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .tab:hover:not(.active) {
+            background-color: #bdc3c7;
+        }
+
+        /* Estilos para secciones de contenido */
+        .content-section {
+            display: none;
+            background-color: white;
+            padding: 25px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        /* Estilos para asientos contables */
+        .asiento {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .asiento-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .asiento-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .asiento-controls button {
+            margin-left: 8px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        .btn-move {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn-delete {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .btn-add {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .movimientos-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        .movimientos-table th {
+            background-color: #34495e;
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .movimientos-table td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .movimientos-table input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* Estilos para Cuentas T */
+        .cuenta-t {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 25px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .cuenta-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .cuenta-name {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #2c3e50;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            flex-grow: 1;
+        }
+
+        .cuenta-controls button {
+            margin-left: 8px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        .t-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        .t-table th {
+            background-color: #34495e;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .t-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .t-table input {
+            width: 90%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .total-row {
+            font-weight: bold;
+            background-color: #f8f9fa;
+        }
+
+        /* Botones principales */
+        .main-actions {
+            margin: 20px 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        .main-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn-success {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .movimientos-table th, 
+            .movimientos-table td,
+            .t-table th,
+            .t-table td {
+                padding: 8px 5px;
+                font-size: 0.9em;
+            }
+            
+            .asiento-controls button,
+            .cuenta-controls button {
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="contabilidad-header">
+        <h1>Asientos Contables y Cuentas T</h1>
+    </header>
+
+    <div class="container">
+        <div class="tab-container">
+            <div class="tab active" onclick="showSection('asientos-section')">Asientos Contables</div>
+            <div class="tab" onclick="showSection('cuentas-section')">Cuentas T</div>
+        </div>
+
+ <section>
+<h2 style="text-align: center;">¿QUÉ ES UN ASIENTO CONTABLE?</h2>
+            <p>Un asiento contable es un registro formal de una transacción financiera que se realiza en los libros contables de una empresa, en el que se especifican las cuentas afectadas, así como los valores cargados al debe y al haber, siguiendo los principios de la partida doble.
+
+En resumen:
+El asiento contable permite reflejar, de manera ordenada y sistemática, las operaciones económicas de una entidad para asegurar el control y la transparencia financiera.</p>
+            <p></p>  <br>
+            <p>Estructura de asientos contables:</p>
+            <p></p>
+            <p class="viñeta-alternativa">Fecha de la transacción</p>
+            <p class="viñeta-alternativa">Breve descripción o concepto del movimiento</p>
+            <p class="viñeta-alternativa">Nombre de la cuenta debitada y monto en el debe</p>
+            <p class="viñeta-alternativa">Nombre de la cuenta acreditada y monto en el haber</p><br>
+          
+    </section>
+
+
+
+        <!-- Sección de Asientos Contables -->
+        <div id="asientos-section" class="content-section active">
+            <div class="main-actions">
+                <button class="main-btn btn-primary" onclick="agregarAsiento()">+ Nuevo Asiento</button>
+                <button class="main-btn btn-success" onclick="generarCuentasT()">Generar Cuentas T</button>
+            </div>
+
+            <div id="lista-asientos"></div>
+        </div>
+
+        <!-- Sección de Cuentas T -->
+        <div id="cuentas-section" class="content-section">
+            <div class="main-actions">
+                <button class="main-btn btn-primary" onclick="agregarCuentaT()">+ Nueva Cuenta T</button>
+                <button class="main-btn btn-success" onclick="calcularTotales()">Calcular Todos los Totales</button>
+            </div>
+
+            <div id="contenedor-cuentas"></div>
+        </div>
+    </div>
+
+
+    <script>
+        // Variables globales
+        let contadorAsientos = 0;
+        let contadorCuentas = 0;
+        let asientosData = [];
+        let cuentasData = {};
+
+        // Mostrar sección activa
+        function showSection(sectionId) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.getElementById(sectionId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // ========== FUNCIONALIDAD PARA ASIENTOS CONTABLES ==========
+        function agregarAsiento() {
+            contadorAsientos++;
+            const asientoId = `asiento-${contadorAsientos}`;
+            
+            const asiento = document.createElement('div');
+            asiento.className = 'asiento';
+            asiento.id = asientoId;
+            asiento.dataset.id = contadorAsientos;
+            
+            asiento.innerHTML = `
+                <div class="asiento-header">
+                    <div class="asiento-title">Asiento #${contadorAsientos}</div>
+                    <div class="asiento-controls">
+                        <button class="btn-move" onclick="moverAsiento(this, -1)">↑</button>
+                        <button class="btn-move" onclick="moverAsiento(this, 1)">↓</button>
+                        <button class="btn-delete" onclick="eliminarAsiento(this)">×</button>
+                    </div>
+                </div>
+                <div class="asiento-body">
+                    <table class="movimientos-table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Descripción</th>
+                                <th>Cuenta</th>
+                                <th>Referencia</th>
+                                <th>Debe ($)</th>
+                                <th>Haber ($)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="movimientos-${asientoId}">
+                            <tr>
+                                <td><input type="date"></td>
+                                <td><input type="text" placeholder="Descripción"></td>
+                                <td><input type="text" placeholder="Cuenta" class="cuenta-input"></td>
+                                <td><input type="text" placeholder="Ref."></td>
+                                <td><input type="number" min="0" step="0.01" class="debe"></td>
+                                <td><input type="number" min="0" step="0.01" class="haber"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="asiento-footer">
+                    <button class="btn-add" onclick="agregarMovimiento('${asientoId}')">+ Agregar Movimiento</button>
+                </div>
+            `;
+            
+            document.getElementById('lista-asientos').appendChild(asiento);
+            asientosData.push({
+                id: contadorAsientos,
+                movimientos: [{
+                    fecha: '',
+                    descripcion: '',
+                    cuenta: '',
+                    referencia: '',
+                    debe: 0,
+                    haber: 0
+                }]
+            });
+        }
+
+        function agregarMovimiento(asientoId) {
+            const tbody = document.querySelector(`#${asientoId} tbody`);
+            const row = document.createElement('tr');
+            
+            row.innerHTML = `
+                <td><input type="date"></td>
+                <td><input type="text" placeholder="Descripción"></td>
+                <td><input type="text" placeholder="Cuenta" class="cuenta-input"></td>
+                <td><input type="text" placeholder="Ref."></td>
+                <td><input type="number" min="0" step="0.01" class="debe"></td>
+                <td><input type="number" min="0" step="0.01" class="haber"></td>
+            `;
+            
+            tbody.appendChild(row);
+            
+            // Actualizar datos
+            const asiento = asientosData.find(a => a.id == asientoId.split('-')[1]);
+            if (asiento) {
+                asiento.movimientos.push({
+                    fecha: '',
+                    descripcion: '',
+                    cuenta: '',
+                    referencia: '',
+                    debe: 0,
+                    haber: 0
+                });
+            }
+        }
+
+        function eliminarAsiento(btn) {
+            const asiento = btn.closest('.asiento');
+            const asientoId = asiento.dataset.id;
+            
+            // Eliminar de los datos
+            asientosData = asientosData.filter(a => a.id != asientoId);
+            asiento.remove();
+        }
+
+        function moverAsiento(btn, direction) {
+            const asiento = btn.closest('.asiento');
+            const container = document.getElementById('lista-asientos');
+            const asientos = Array.from(container.children);
+            const index = asientos.indexOf(asiento);
+            const newIndex = index + direction;
+            
+            if (newIndex >= 0 && newIndex < asientos.length) {
+                if (direction === -1) {
+                    container.insertBefore(asiento, asientos[newIndex]);
+                } else {
+                    container.insertBefore(asientos[newIndex].nextSibling, asiento);
+                }
+                
+                // Reordenar datos
+                const asientoData = asientosData.find(a => a.id == asiento.dataset.id);
+                asientosData = asientosData.filter(a => a.id != asiento.dataset.id);
+                asientosData.splice(newIndex, 0, asientoData);
+            }
+        }
+
+        // ========== FUNCIONALIDAD PARA CUENTAS T ==========
+        function generarCuentasT() {
+            // Limpiar datos previos
+            cuentasData = {};
+            document.getElementById('contenedor-cuentas').innerHTML = '';
+            
+            // Recopilar datos de asientos
+            document.querySelectorAll('.asiento').forEach(asiento => {
+                const movimientos = asiento.querySelectorAll('tbody tr');
+                
+                movimientos.forEach(mov => {
+                    const cuenta = mov.querySelector('.cuenta-input').value.trim();
+                    const debe = parseFloat(mov.querySelector('.debe').value) || 0;
+                    const haber = parseFloat(mov.querySelector('.haber').value) || 0;
+                    
+                    if (cuenta) {
+                        if (!cuentasData[cuenta]) {
+                            cuentasData[cuenta] = [];
+                        }
+                        cuentasData[cuenta].push({ debe, haber });
+                    }
+                });
+            });
+            
+            // Generar Cuentas T
+            for (const [cuenta, movimientos] of Object.entries(cuentasData)) {
+                agregarCuentaT(cuenta, movimientos);
+            }
+            
+            // Mostrar sección de Cuentas T
+            showSection('cuentas-section');
+        }
+
+        function agregarCuentaT(nombreCuenta = '', movimientos = []) {
+            contadorCuentas++;
+            const cuentaId = `cuenta-${contadorCuentas}`;
+            
+            const cuenta = document.createElement('div');
+            cuenta.className = 'cuenta-t';
+            cuenta.id = cuentaId;
+            
+            let movimientosHTML = '';
+            if (movimientos.length > 0) {
+                movimientos.forEach((mov, index) => {
+                    movimientosHTML += `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td><input type="number" value="${mov.debe}" class="debe" min="0" step="0.01"></td>
+                            <td><input type="number" value="${mov.haber}" class="haber" min="0" step="0.01"></td>
+                        </tr>
+                    `;
+                });
+            } else {
+                movimientosHTML = `
+                    <tr>
+                        <td>1</td>
+                        <td><input type="number" class="debe" min="0" step="0.01"></td>
+                        <td><input type="number" class="haber" min="0" step="0.01"></td>
+                    </tr>
+                `;
+            }
+            
+            cuenta.innerHTML = `
+                <div class="cuenta-header">
+                    <input type="text" class="cuenta-name" value="${nombreCuenta}" placeholder="Nombre de la cuenta">
+                    <div class="cuenta-controls">
+                        <button class="btn-delete" onclick="eliminarCuentaT('${cuentaId}')">×</button>
+                    </div>
+                </div>
+                <table class="t-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>DEBE</th>
+                            <th>HABER</th>
+                        </tr>
+                    </thead>
+                    <tbody id="movimientos-${cuentaId}">
+                        ${movimientosHTML}
+                    </tbody>
+                    <tfoot>
+                        <tr class="total-row">
+                            <td>TOTAL</td>
+                            <td id="total-debe-${cuentaId}">0.00</td>
+                            <td id="total-haber-${cuentaId}">0.00</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td>SALDO</td>
+                            <td colspan="2" id="saldo-${cuentaId}">0.00</td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="cuenta-footer">
+                    <button class="btn-add" onclick="agregarFilaCuentaT('${cuentaId}')">+ Agregar Fila</button>
+                    <button class="btn-success" onclick="calcularCuentaT('${cuentaId}')">Calcular</button>
+                </div>
+            `;
+            
+            document.getElementById('contenedor-cuentas').appendChild(cuenta);
+            
+            // Calcular automáticamente si hay movimientos
+            if (movimientos.length > 0) {
+                calcularCuentaT(cuentaId);
+            }
+        }
+
+        function agregarFilaCuentaT(cuentaId) {
+            const tbody = document.querySelector(`#${cuentaId} tbody`);
+            const rowCount = tbody.querySelectorAll('tr').length;
+            
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${rowCount + 1}</td>
+                <td><input type="number" class="debe" min="0" step="0.01"></td>
+                <td><input type="number" class="haber" min="0" step="0.01"></td>
+            `;
+            
+            tbody.appendChild(row);
+        }
+
+        function eliminarCuentaT(cuentaId) {
+            if (confirm('¿Estás seguro de eliminar esta cuenta?')) {
+                document.getElementById(cuentaId).remove();
+            }
+        }
+
+        function calcularCuentaT(cuentaId) {
+            const debeInputs = document.querySelectorAll(`#${cuentaId} .debe`);
+            const haberInputs = document.querySelectorAll(`#${cuentaId} .haber`);
+            
+            let totalDebe = 0;
+            let totalHaber = 0;
+            
+            debeInputs.forEach(input => {
+                totalDebe += parseFloat(input.value) || 0;
+            });
+            
+            haberInputs.forEach(input => {
+                totalHaber += parseFloat(input.value) || 0;
+            });
+            
+            const saldo = totalDebe - totalHaber;
+            
+            document.getElementById(`total-debe-${cuentaId}`).textContent = totalDebe.toFixed(2);
+            document.getElementById(`total-haber-${cuentaId}`).textContent = totalHaber.toFixed(2);
+            document.getElementById(`saldo-${cuentaId}`).textContent = saldo.toFixed(2);
+            
+            // Resaltar saldo
+            const saldoCell = document.getElementById(`saldo-${cuentaId}`);
+            if (saldo > 0) {
+                saldoCell.innerHTML = `<span style="color: #e74c3c;">Deudor: ${saldo.toFixed(2)}</span>`;
+            } else if (saldo < 0) {
+                saldoCell.innerHTML = `<span style="color: #27ae60;">Acreedor: ${Math.abs(saldo).toFixed(2)}</span>`;
+            } else {
+                saldoCell.innerHTML = `<span>${saldo.toFixed(2)}</span>`;
+            }
+        }
+
+        function calcularTotales() {
+            document.querySelectorAll('.cuenta-t').forEach(cuenta => {
+                const cuentaId = cuenta.id;
+                calcularCuentaT(cuentaId);
+            });
+        }
+
+        // Inicializar con un asiento
+        window.onload = function() {
+            agregarAsiento();
+        };
+    </script>
+</body>
+</html>

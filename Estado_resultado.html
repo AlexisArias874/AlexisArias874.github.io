@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Estado de Rsultados</title>
+        <link rel="stylesheet" href="styles.css">
+        <style>
+            p.viñeta-alternativa {
+                display: list-item;
+                list-style-type: disc;
+            }
+    
+            /* MENÚ SUPERIOR HORIZONTAL */
+            .nav-bar {
+                background-color: #2c3e50; /* mismo color que el header (ajústalo si usas otro) */
+                padding: 10px;
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+    
+            .nav-bar a {
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+                padding: 8px 12px;
+                transition: background-color 0.3s ease;
+            }
+    
+            .nav-bar a:hover {
+                background-color: #34495e;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+    <body>
+    
+        <!-- MENÚ SUPERIOR HORIZONTAL -->
+        <nav class="nav-bar">
+            <a href="index.html">INICIO</a>
+            <a href="costos_variables.html">COSTOS VARIABLES UNITARIOS Y COSTOS FIJOS TOTALES</a>
+            <a href="t_mayor.html">CUENTAS T</a>
+            <a href="punto_alto_bajo.html">PUNTO ALTO Y PUNTO BAJO</a>
+            <a href="PUNTOE.html">PUNTO DE EQUILIBRIO</a>
+            <a href="Asientos.html">ASIENTOS CONTABLES</a>
+        </nav>
+<head>
+    <meta charset="UTF-8">
+    <title>Estado de Resultados</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        p.viñeta-alternativa {
+            display: list-item;
+            list-style-type: disc; /* Estilo de la viñeta */
+        }
+    </style>
+</head>
+<body>
+    <header class="index-header3">
+        <h1>ESTADO DE RESULTADOS</h1>
+    </header>
+    <section>
+        <h2 style="text-align: center;">Estado de Resultados</h2>
+        <p>Es un informe financiero que resume los ingresos y gastos de una empresa durante un período determinado, generalmente un mes, trimestre o año. Este informe muestra la rentabilidad de la empresa y ayuda a los gerentes y propietarios a tomar decisiones informadas sobre la gestión de la empresa.</p>
+        
+        <h2 style="text-align: center;">Ventas Netas</h2>
+        <p>Las Ventas Netas son el total de ingresos que una empresa obtiene por la venta de sus productos o servicios, después de deducir los descuentos, devoluciones y otras deducciones. Las Ventas Netas son el punto de partida para calcular la utilidad bruta y la utilidad operativa.</p>
+        
+        <h2 style="text-align: center;">Utilidad Bruta</h2>
+        <p>La Utilidad Bruta es la diferencia entre las Ventas Netas y el Costo de Ventas. El Costo de Ventas incluye el costo de las materias primas, la mano de obra directa y otros gastos directamente relacionados con la producción y venta de los productos o servicios.</p>
+        <p class="viñeta-alternativa">Fórmula:</p>
+        <p class="viñeta-alternativa">Utilidad Bruta = Ventas Netas - Costo de Ventas</p>
+        
+        <h2 style="text-align: center;">Utilidad Operativa</h2>
+        <p>La Utilidad Operativa es la utilidad que queda después de deducir los gastos operativos de la Utilidad Bruta. Los gastos operativos incluyen los gastos de administración, ventas, marketing y otros gastos relacionados con la operación de la empresa.</p>
+        <p class="viñeta-alternativa">Fórmula:</p>
+        <p class="viñeta-alternativa">Utilidad Operativa = Utilidad Bruta - Gastos Operativos</p>
+        <img src="4.jpg" alt="Ejemplo ilustrativo" class="marco-decorativo4"> 
+
+        <h1>CALCULA AQUÍ</h1>  
+    </section>
+
+    <main class="seccion-er">
+        <!-- Ingresos -->
+        <div class="fila-er">
+            <span>Ventas Netas:</span>
+            <input type="number" id="ventas" placeholder="0.00">
+        </div>
+        
+        <!-- Costos -->
+        <div class="fila-er">
+            <span>(-) Costo de Ventas:</span>
+            <input type="number" id="costo-ventas" placeholder="0.00">
+        </div>
+        
+        <div class="fila-er total">
+            <span>UTILIDAD BRUTA:</span>
+            <span id="utilidad-bruta">0.00</span>
+        </div>
+        
+        <!-- Gastos -->
+        <div class="fila-er">
+            <span>(-) Gastos Operativos:</span>
+            <input type="number" id="gastos-operativos" placeholder="0.00">
+        </div>
+        
+        <div class="fila-er">
+            <span>(-) Gastos Administrativos:</span>
+            <input type="number" id="gastos-administrativos" placeholder="0.00">
+        </div>
+        
+        <div class="fila-er total">
+            <span>UTILIDAD OPERATIVA:</span>
+            <span id="utilidad-operativa">0.00</span>
+        </div>
+        
+        <!-- Otros -->
+        <div class="fila-er">
+            <span>(+) Ingresos Extraordinarios:</span>
+            <input type="number" id="ingresos-extra" placeholder="0.00">
+        </div>
+        
+        <div class="fila-er">
+            <span>(-) Impuestos:</span>
+            <input type="number" id="impuestos" placeholder="0.00">
+        </div>
+        
+        <div class="fila-er total">
+            <span>UTILIDAD NETA:</span>
+            <span id="utilidad-neta">0.00</span>
+        </div>
+        
+        <button class="boton-calcular" onclick="calcularER()">CALCULAR</button>
+    </main>
+
+    <script>
+        function calcularER() {
+            // Obtener valores
+            const ventas = parseFloat(document.getElementById('ventas').value) || 0;
+            const costoVentas = parseFloat(document.getElementById('costo-ventas').value) || 0;
+            const gastosOperativos = parseFloat(document.getElementById('gastos-operativos').value) || 0;
+            const gastosAdmin = parseFloat(document.getElementById('gastos-administrativos').value) || 0;
+            const ingresosExtra = parseFloat(document.getElementById('ingresos-extra').value) || 0;
+            const impuestos = parseFloat(document.getElementById('impuestos').value) || 0;
+            
+            // Cálculos
+            const utilidadBruta = ventas - costoVentas;
+            const utilidadOperativa = utilidadBruta - gastosOperativos - gastosAdmin;
+            const utilidadNeta = utilidadOperativa + ingresosExtra - impuestos;
+            
+            // Mostrar resultados
+            document.getElementById('utilidad-bruta').textContent = utilidadBruta.toFixed(2);
+            document.getElementById('utilidad-operativa').textContent = utilidadOperativa.toFixed(2);
+            document.getElementById('utilidad-neta').textContent = utilidadNeta.toFixed(2);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Punto De Equilibrio</title>
+        <link rel="stylesheet" href="styles.css">
+        <style>
+            p.viñeta-alternativa {
+                display: list-item;
+                list-style-type: disc;
+            }
+    
+            /* MENÚ SUPERIOR HORIZONTAL */
+            .nav-bar {
+                background-color: #2c3e50; /* mismo color que el header (ajústalo si usas otro) */
+                padding: 10px;
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+    
+            .nav-bar a {
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+                padding: 8px 12px;
+                transition: background-color 0.3s ease;
+            }
+    
+            .nav-bar a:hover {
+                background-color: #34495e;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+    <body>
+    
+        <!-- MENÚ SUPERIOR HORIZONTAL -->
+        <nav class="nav-bar">
+            <a href="index.html">INICIO</a>
+            <a href="costos_variables.html">COSTOS VARIABLES UNITARIOS Y COSTOS FIJOS TOTALES</a>
+            <a href="t_mayor.html">CUENTAS T</a>
+            <a href="Estado_resultado.html">ESTADO DE RESULTADOS</a>
+            <a href="punto_alto_bajo.html">PUNTO ALTO Y PUNTO BAJO</a>
+            <a href="Asientos.html">ASIENTOS CONTABLES</a>
+        </nav>
+<head>
+    <meta charset="UTF-8">
+    <title>Punto de Equilibrio</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        p.viñeta-alternativa {
+            display: list-item;
+            list-style-type: disc; 
+        }
+    </style>
+</head>
+<body>
+    <header class="index-header4">
+        <h1>PUNTO DE EQUILIBRIO</h1>
+    </header>
+    <section>
+        <h2 style="text-align: center;">¿QUÉ ES?</h2>
+        <p>El punto de equilibrio, también conocido como break-even point, es el nivel de ventas o ingresos que una empresa necesita alcanzar para cubrir todos sus costos, tanto fijos como variables. En ese punto, la empresa no genera ni pérdidas ni ganancias.</p>
+        <p>*</p>
+        <p>Es una herramienta clave para la planificación financiera y la toma de decisiones empresariales, ya que permite determinar:</p>
+        <p class="viñeta-alternativa">El nivel de ventas necesario para cubrir todos los costos.</p>
+        <p class="viñeta-alternativa">La rentabilidad de un producto o servicio.</p>
+        <p class="viñeta-alternativa">El impacto de cambios en los costos o precios en la rentabilidad de la empresa.</p>
+        <p class="viñeta-alternativa">Si la empresa está operando con rentabilidad o no.</p>
+        <img src="7.webp" alt="Diagrama de punto de equilibrio" class="marco-decorativo5">
+    </section>
+    
+    <main class="pe-container">
+        <h2 style="text-align: center; color: #2c3e50;">Análisis de Punto de Equilibrio</h2>
+        
+        <div class="pe-input-group">
+            <label for="costos-fijos">Costos Fijos Totales ($):</label>
+            <input type="number" id="costos-fijos" class="pe-input" placeholder="Ej: 5000" min="0" step="0.01">
+        </div>
+        
+        <div class="pe-input-group">
+            <label for="precio-venta">Precio de Venta Unitario ($):</label>
+            <input type="number" id="precio-venta" class="pe-input" placeholder="Ej: 50" min="0" step="0.01">
+        </div>
+        
+        <div class="pe-input-group">
+            <label for="costo-variable">Costo Variable Unitario ($):</label>
+            <input type="number" id="costo-variable" class="pe-input" placeholder="Ej: 30" min="0" step="0.01">
+        </div>
+        
+        <button class="pe-boton" onclick="calcularPuntoEquilibrio()">CALCULAR PUNTO DE EQUILIBRIO</button>
+        
+        <div class="pe-resultados" id="resultados" style="display: none;">
+            <h3 style="margin-top: 0; color: #2c3e50;">Resultados:</h3>
+            
+            <div class="pe-formula">
+                <p><strong>Fórmula:</strong> PE = Costos Fijos / (Precio Venta - Costo Variable)</p>
+            </div>
+            
+            <table class="pe-tabla">
+                <tr>
+                    <th>Concepto</th>
+                    <th>Valor</th>
+                </tr>
+                <tr>
+                    <td>Punto de Equilibrio (Unidades)</td>
+                    <td id="pe-unidades">0</td>
+                </tr>
+                <tr>
+                    <td>Punto de Equilibrio ($)</td>
+                    <td id="pe-pesos">$0.00</td>
+                </tr>
+                <tr>
+                    <td>Margen de Contribución Unitario</td>
+                    <td id="margen-contribucion">$0.00</td>
+                </tr>
+            </table>
+            
+            <div style="margin-top: 20px;">
+                <p><strong>Interpretación:</strong> <span id="interpretacion"></span></p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function calcularPuntoEquilibrio() {
+            // Obtener valores
+            const costosFijos = parseFloat(document.getElementById('costos-fijos').value) || 0;
+            const precioVenta = parseFloat(document.getElementById('precio-venta').value) || 0;
+            const costoVariable = parseFloat(document.getElementById('costo-variable').value) || 0;
+            
+            // Validar datos
+            if (costosFijos <= 0 || precioVenta <= 0 || costoVariable <= 0) {
+                alert("Todos los valores deben ser mayores a cero");
+                return;
+            }
+            
+            if (precioVenta <= costoVariable) {
+                alert("El precio de venta debe ser mayor al costo variable");
+                return;
+            }
+            
+            // Calcular
+            const margenContribucion = precioVenta - costoVariable;
+            const peUnidades = Math.ceil(costosFijos / margenContribucion);
+            const pePesos = peUnidades * precioVenta;
+            
+            // Mostrar resultados
+            document.getElementById('pe-unidades').textContent = peUnidades;
+            document.getElementById('pe-pesos').textContent = `$${pePesos.toFixed(2)}`;
+            document.getElementById('margen-contribucion').textContent = `$${margenContribucion.toFixed(2)}`;
+            
+            document.getElementById('interpretacion').textContent = 
+                `Debes vender ${peUnidades} unidades ($${pePesos.toFixed(2)}) para cubrir todos tus costos. 
+                Cada unidad vendida aporta $${margenContribucion.toFixed(2)} para cubrir costos fijos.`;
+            
+            document.getElementById('resultados').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

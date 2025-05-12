@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Costos Variables Unitarios Y Costos Fijos Totales</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        p.viñeta-alternativa {
+            display: list-item;
+            list-style-type: disc;
+        }
+
+        /* MENÚ SUPERIOR HORIZONTAL */
+        .nav-bar {
+            background-color: #2c3e50; /* mismo color que el header (ajústalo si usas otro) */
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-bar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 12px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-bar a:hover {
+            background-color: #34495e;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MENÚ SUPERIOR HORIZONTAL -->
+    <nav class="nav-bar">
+        <a href="index.html">INICIO</a>
+        <a href="t_mayor.html">CUENTAS T</a>
+        <a href="Estado_resultado.html">ESTADO DE RESULTADOS</a>
+        <a href="punto_alto_bajo.html">PUNTO ALTO Y PUNTO BAJO</a>
+        <a href="PUNTOE.html">PUNTO DE EQUILIBRIO</a>
+        <a href="Asientos.html">ASIENTOS CONTABLES</a>
+    </nav>
+
+    <header class="costos-header">
+        <h1>COSTOS VARIABLES UNITARIOS Y COSTOS FIJOS TOTALES</h1>
+    </header>
+
+    <main>
+
+ 
+    <section>
+            <h2 style="text-align: center;">Costos Fijos Totales (CFT)</h2>
+            <p>Los costos fijos totales son los gastos en los que incurre una empresa en un período determinado, independientemente de la cantidad de productos o servicios que produzca o venda. Estos costos no varían con la cantidad de producción o ventas, y se mantienen constantes durante un período determinado.</p>
+            <p></p>  <br>
+            <p>Ejemplos de costos fijos totales:</p>
+            <p></p>
+            <p class="viñeta-alternativa">Alquiler de la fábrica o local comercial</p>
+            <p class="viñeta-alternativa">Salarios de los empleados administrativos</p>
+            <p class="viñeta-alternativa">Seguros</p>
+            <p class="viñeta-alternativa">Depreciación de activos fijos</p>
+            <p class="viñeta-alternativa">Gastos de mantenimiento</p>
+           <img   src="2.jpg"   alt="Ejemplo decorativo" class="marco-decorativo2">
+
+
+            <h2 style="text-align: center;">Costo Variable Unitario (CVU)</h2>
+            <p>El costo variable unitario es el costo adicional en el que se incurre por producir una unidad adicional de un producto o servicio. Este costo varía directamente con la cantidad de producción o ventas.</p>
+            <p></p><br>
+            <p>Ejemplos de costos variables unitarios:</p>
+            <p></p>
+            <p class="viñeta-alternativa">Costo de materias primas por unidad</p>
+            <p class="viñeta-alternativa">Costo de mano de obra directa por unidad</p>
+            <p class="viñeta-alternativa">Costo de energía y combustible por unidad</p>
+           <img   src="1.png"   alt="Ejemplo decorativo" class="marco-decorativo2">
+
+            
+            <h1>CALCULADORA DE COSTO TOTAL</h1>
+
+    </section>
+
+        <form class="form-container">
+            <label for="costo-fijo-total">Costo Fijo Total ($):</label>
+            <input type="number" id="costo-fijo-total" placeholder="Ej: 1000">
+
+            <label for="costo-variable-unitario">Costo Variable Unitario ($):</label>
+            <input type="number" id="costo-variable-unitario" placeholder="Ej: 5">
+
+            <label for="unidades-producidas">Unidades Producidas:</label>
+            <input type="number" id="unidades-producidas" placeholder="Ej: 200">
+
+            <button type="button" onclick="calcularCostos()">Calcular</button>
+        </form>
+
+        <div id="resultados">
+            <h3>Resultados:</h3>
+            <p><strong>Costo Fijo Unitario:</strong> $<span id="costo-fijo-unitario">0.00</span></p>
+            <p><strong>Costo Variable Total:</strong> $<span id="costo-variable-total">0.00</span></p>
+            <p><strong>Costo Total:</strong> $<span id="costo-total">0.00</span></p>
+        </div>
+    </main>
+
+    <script>
+        function calcularCostos() {
+            const cfTotal = parseFloat(document.getElementById('costo-fijo-total').value);
+            const cvUnitario = parseFloat(document.getElementById('costo-variable-unitario').value);
+            const unidades = parseFloat(document.getElementById('unidades-producidas').value);
+
+            const cfUnitario = cfTotal / unidades;
+            const cvTotal = cvUnitario * unidades;
+            const costoTotal = cfTotal + cvTotal;
+
+            document.getElementById('costo-fijo-unitario').textContent = cfUnitario.toFixed(2);
+            document.getElementById('costo-variable-total').textContent = cvTotal.toFixed(2);
+            document.getElementById('costo-total').textContent = costoTotal.toFixed(2);
+        }
+    </script>
+
+</body>
+</html>

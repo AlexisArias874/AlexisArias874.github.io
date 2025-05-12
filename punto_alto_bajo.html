@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Punto Alto Y Punto Bajo</title>
+        <link rel="stylesheet" href="styles.css">
+        <style>
+            p.viñeta-alternativa {
+                display: list-item;
+                list-style-type: disc;
+            }
+    
+            /* MENÚ SUPERIOR HORIZONTAL */
+            .nav-bar {
+                background-color: #2c3e50; /* mismo color que el header (ajústalo si usas otro) */
+                padding: 10px;
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+    
+            .nav-bar a {
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+                padding: 8px 12px;
+                transition: background-color 0.3s ease;
+            }
+    
+            .nav-bar a:hover {
+                background-color: #34495e;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+    <body>
+    
+        <!-- MENÚ SUPERIOR HORIZONTAL -->
+        <nav class="nav-bar">
+            <a href="index.html">INICIO</a>
+            <a href="costos_variables.html">COSTOS VARIABLES UNITARIOS Y COSTOS FIJOS TOTALES</a>
+            <a href="t_mayor.html">CUENTAS T</a>
+            <a href="Estado_resultado.html">ESTADO DE RESULTADOS</a>
+            <a href="PUNTOE.html">PUNTO DE EQUILIBRIO</a>
+            <a href="Asientos.html">ASIENTOS CONTABLES</a>
+        </nav>
+<head>
+    <meta charset="UTF-8">
+    <title>Punto Alto y Punto Bajo</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        p.viñeta-alternativa {
+            display: list-item;
+            list-style-type: disc; /* Estilo de la viñeta */
+        }
+    </style>
+</head>
+<body>
+    <header class="index-header4">
+        <h1>MÉTODO PUNTO ALTO Y PUNTO BAJO</h1>
+    </header>
+    <section>
+        <h2 style="text-align: center;">¿QUÉ ES?</h2>
+        <p>El método de punto alto - punto bajo es una técnica de segmentación de costos en contabilidad para separar los componentes fijo y variable presentes en los costos mixtos o semivariables.</p>
+        <p></p><br>
+        <p>En resumen: El método de punto alto-punto bajo simplifica la separación de costos mixtos utilizando solo dos puntos de datos, lo que facilita la estimación de la parte fija y la parte variable de los costos.</p>
+        <p class="viñeta-alternativa">Fórmulas:</p>
+        <p class="viñeta-alternativa">CVU = (Costo Total Punto Alto - Costo Total Punto Bajo) / (Nivel de Actividad Punto Alto - Nivel de Actividad Punto Bajo)</p>
+        <p class="viñeta-alternativa">CFT = Costo Total en Punto Alto - (CVU × Nivel de Actividad en Punto Alto)</p>
+        <img src="6.webp" alt="Ejemplo gráfico del método" class="marco-decorativo5">
+    </section>
+
+    <main class="costos-container">
+        <h2 style="text-align: center; color: #2c3e50;">Análisis de Costos</h2>
+        
+        <button class="boton-agregar" onclick="agregarMes()">+ Agregar Mes</button>
+        
+        <table class="tabla-costos">
+            <thead>
+                <tr>
+                    <th>Período</th>
+                    <th>Nivel de Actividad (Unidades)</th>
+                    <th>Costo Total ($)</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody id="datos-costos">
+                <!-- Meses iniciales -->
+                <tr id="fila1">
+                    <td>
+                        <select class="input-periodo">
+                            <option>Enero</option>
+                            <option>Febrero</option>
+                            <option>Marzo</option>
+                            <option>Abril</option>
+                            <option>Mayo</option>
+                            <option>Junio</option>
+                            <option>Julio</option>
+                            <option>Agosto</option>
+                            <option>Septiembre</option>
+                            <option>Octubre</option>
+                            <option>Noviembre</option>
+                            <option>Diciembre</option>
+                        </select>
+                    </td>
+                    <td><input type="number" class="input-costo" id="unidades1" placeholder="0" min="0"></td>
+                    <td><input type="number" class="input-costo" id="costo1" placeholder="0.00" min="0" step="0.01"></td>
+                    <td><button onclick="eliminarFila('fila1')" style="background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">X</button></td>
+                </tr>
+                <tr id="fila2">
+                    <td>
+                        <select class="input-periodo">
+                            <option>Enero</option>
+                            <option>Febrero</option>
+                            <option>Marzo</option>
+                            <option>Abril</option>
+                            <option>Mayo</option>
+                            <option>Junio</option>
+                            <option>Julio</option>
+                            <option>Agosto</option>
+                            <option>Septiembre</option>
+                            <option>Octubre</option>
+                            <option>Noviembre</option>
+                            <option>Diciembre</option>
+                        </select>
+                    </td>
+                    <td><input type="number" class="input-costo" id="unidades2" placeholder="0" min="0"></td>
+                    <td><input type="number" class="input-costo" id="costo2" placeholder="0.00" min="0" step="0.01"></td>
+                    <td><button onclick="eliminarFila('fila2')" style="background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">X</button></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="resultados">
+            <h3 style="margin-top: 0; color: #2c3e50;">Resultados:</h3>
+            <p><strong>Punto Alto:</strong> <span id="punto-alto">-</span></p>
+            <p><strong>Punto Bajo:</strong> <span id="punto-bajo">-</span></p>
+            <p><strong>Costo Variable Unitario (b):</strong> $<span id="costo-variable">0.00</span></p>
+            <p><strong>Costo Fijo Total (a):</strong> $<span id="costo-fijo">0.00</span></p>
+            <p><strong>Fórmula Costo Total:</strong> <strong>Y = <span id="costo-fijo-formula">0.00</span> + <span id="costo-variable-formula">0.00</span>X</strong></p>
+        </div>
+        
+        <button class="boton-calcular" onclick="calcularPuntoAltoBajo()">CALCULAR COSTOS</button>
+    </main>
+
+    <script>
+        let contadorFilas = 2;
+        const mesesDisponibles = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+        
+        function agregarMes() {
+            if (contadorFilas >= 12) {
+                alert("Máximo 12 meses permitidos");
+                return;
+            }
+            
+            contadorFilas++;
+            const filaId = `fila${contadorFilas}`;
+            const tbody = document.getElementById('datos-costos');
+            
+            // Crear nueva fila
+            const nuevaFila = document.createElement('tr');
+            nuevaFila.id = filaId;
+            
+            // Select de meses (excluyendo los ya seleccionados)
+            let opcionesMeses = '<option value="">Seleccione</option>';
+            const mesesUsados = Array.from(document.querySelectorAll('.input-periodo')).map(select => select.value);
+            
+            mesesDisponibles.forEach(mes => {
+                if (!mesesUsados.includes(mes)) {
+                    opcionesMeses += `<option>${mes}</option>`;
+                }
+            });
+            
+            nuevaFila.innerHTML = `
+                <td>
+                    <select class="input-periodo" onchange="validarMeses()">
+                        ${opcionesMeses}
+                    </select>
+                </td>
+                <td><input type="number" class="input-costo" id="unidades${contadorFilas}" placeholder="0" min="0"></td>
+                <td><input type="number" class="input-costo" id="costo${contadorFilas}" placeholder="0.00" min="0" step="0.01"></td>
+                <td><button onclick="eliminarFila('${filaId}')" style="background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">X</button></td>
+            `;
+            
+            tbody.appendChild(nuevaFila);
+        }
+        
+        function eliminarFila(id) {
+            if (document.querySelectorAll('#datos-costos tr').length <= 2) {
+                alert("Debe haber al menos dos períodos");
+                return;
+            }
+            
+            const fila = document.getElementById(id);
+            fila.remove();
+            contadorFilas--;
+            validarMeses();
+        }
+        
+        function validarMeses() {
+            const selects = document.querySelectorAll('.input-periodo');
+            const valores = Array.from(selects).map(select => select.value);
+            
+            // Verificar duplicados
+            selects.forEach(select => {
+                const count = valores.filter(v => v === select.value).length;
+                select.style.borderColor = count > 1 ? 'red' : '#ccc';
+            });
+        }
+        
+        function calcularPuntoAltoBajo() {
+            const datos = [];
+            
+            // Recopilar datos válidos
+            document.querySelectorAll('#datos-costos tr').forEach((fila, index) => {
+                const periodo = fila.querySelector('.input-periodo').value;
+                const unidades = parseFloat(fila.querySelector('td:nth-child(2) input').value) || 0;
+                const costo = parseFloat(fila.querySelector('td:nth-child(3) input').value) || 0;
+                
+                if (periodo && unidades > 0 && costo > 0) {
+                    datos.push({ periodo, unidades, costo });
+                }
+            });
+            
+            // Validar mínimo 2 períodos
+            if (datos.length < 2) {
+                alert("Ingrese datos válidos para al menos 2 períodos");
+                return;
+            }
+            
+            // Ordenar por nivel de actividad (unidades)
+            datos.sort((a, b) => a.unidades - b.unidades);
+            
+            const puntoBajo = datos[0];
+            const puntoAlto = datos[datos.length - 1];
+            
+            // Aplicar fórmula correcta:
+            // b = (Costo Alto - Costo Bajo) / (Unidades Alto - Unidades Bajo)
+            // a = Costo Total - (b × Unidades)
+            const b = (puntoAlto.costo - puntoBajo.costo) / (puntoAlto.unidades - puntoBajo.unidades);
+            const a = puntoAlto.costo - (b * puntoAlto.unidades);
+            
+            // Mostrar resultados
+            document.getElementById('punto-alto').textContent = 
+                `${puntoAlto.periodo}: ${puntoAlto.unidades} unidades, $${puntoAlto.costo.toFixed(2)}`;
+                
+            document.getElementById('punto-bajo').textContent = 
+                `${puntoBajo.periodo}: ${puntoBajo.unidades} unidades, $${puntoBajo.costo.toFixed(2)}`;
+            
+            document.getElementById('costo-variable').textContent = b.toFixed(4);
+            document.getElementById('costo-fijo').textContent = a.toFixed(2);
+            document.getElementById('costo-variable-formula').textContent = b.toFixed(4);
+            document.getElementById('costo-fijo-formula').textContent = a.toFixed(2);
+        }
+    </script>
+</body>
+</html>
